@@ -1,5 +1,4 @@
-#decentrelized db like lib that alows you to use simple python syntax like there is a local db althou it is all stored in the #blockchain
-
+import ipfsapi
 
 
 class Table:
@@ -51,4 +50,43 @@ class Table:
 
 
 #TODO:
-#class ipfshandler:
+class ipfshandler:
+	def __init__(self,port):
+		self.port = port
+		self.api = ipfsapi.connect("127.0.0.1",port)
+
+	def UpdateDb(self,table):
+		Formatter.FormatToFile(table)
+		api.add(table.name)
+
+	def GetDbEntry
+
+class Formatter:
+
+	def FormatToFile(table):
+		f = open(table.name,'w')
+		colum = ""
+		for cols in table.col:
+			colum += cols + ','
+		f.write(colum)
+		for data in table.data:
+			line = ""
+			for col in data:
+				line+=col + ','
+			f.write(line)
+		f.close()
+
+	def FormatFromFile(self,fname):
+		f = open(fname,'r')
+		col = []
+		data = []
+		count = 1
+		for line in f:
+			if count == 1:
+				col = line.split(',')[-1]
+				count+=1
+			else:
+				data.append(line.split(',')[-1])
+		tbl = Table(col,fname)
+		tbl.data = data
+		return tbl
